@@ -11,8 +11,8 @@ const Header = () => {
       <div className='absolute inset-0 bg-black/10'></div>
       
       {/* Trust Badge */}
-      <div className='absolute top-6 right-6 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2'>
-        <div className='flex items-center gap-2 text-white text-sm'>
+      <div className='absolute top-6 right-6 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 z-10'>
+        <div className='flex items-center gap-2 text-white text-sm font-medium'>
           <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
           <span className='text-white'>24/7 Emergency Service</span>
         </div>
