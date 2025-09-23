@@ -26,7 +26,7 @@ git push origin main
 ### 4. Automatic Deployment
 - The GitHub Actions workflow will automatically build and deploy your site
 - Go to **Actions** tab in your repository to monitor the deployment
-- Once completed, your site will be available at: `https://[your-username].github.io/coolstarservices/`
+- Once completed, your site will be available at: `https://[your-username].github.io/CoolStarsServices/`
 
 ### 5. Manual Deployment (Alternative)
 If you prefer manual deployment:
@@ -36,8 +36,8 @@ npm run deploy
 ```
 
 ## Important Notes
-- Your site will be available at: `https://[your-username].github.io/coolstarservices/`
-- The base path is configured as `/coolstarservices/` in vite.config.js
+- Your site will be available at: `https://[your-username].github.io/CoolStarsServices/`
+- The base path is configured as `/CoolStarsServices/` in vite.config.js
 - Make sure your repository name matches the base path configuration
 - The deployment happens automatically on every push to the main branch
 
