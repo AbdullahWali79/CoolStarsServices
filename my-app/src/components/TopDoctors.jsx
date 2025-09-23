@@ -36,148 +36,98 @@ const TopServices = () => {
           </p>
         </div>
 
-        {/* Services Table - Compact Format with Expandable Descriptions */}
-        <div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 mb-8'>
-          <div className='overflow-x-auto'>
-            <table className='w-full'>
-              {/* Table Header */}
-              <thead className='bg-gray-50 border-b border-gray-200'>
-                <tr>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Service</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Speciality</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Experience</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Starting Price</th>
-                  <th className='px-4 py-3 text-center text-sm font-semibold text-gray-900'>Action</th>
-                </tr>
-              </thead>
-              
-              {/* Table Body */}
-              <tbody className='divide-y divide-gray-200'>
-                {services.slice(0, 8).map((service, index) => {
-                  const isExpanded = expandedServices.has(service._id)
-                  return (
-                    <React.Fragment key={index}>
-                      {/* Main Row */}
-                      <tr 
-                        className='hover:bg-gray-50 transition-colors duration-200 cursor-pointer'
-                        onClick={() => navigate(`/appointments/${service._id}`)}
-                      >
-                        {/* Service Icon & Name */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center gap-3'>
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getServiceIconStyle(service.speciality)}`}>
-                              <span className='text-lg'>{getServiceIcon(service.speciality)}</span>
-                            </div>
-                            <div>
-                              <h3 className='font-semibold text-gray-900 text-sm'>{service.name}</h3>
-                              <div className='flex items-center gap-2 mt-1'>
-                                <span className='bg-green-500 text-white px-2 py-0.5 rounded-full text-xs font-medium'>Popular</span>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        
-                        {/* Speciality */}
-                        <td className='px-4 py-3'>
-                          <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium'>
-                            <span>{getServiceIcon(service.speciality)}</span>
-                            <span>{service.speciality}</span>
-                          </div>
-                        </td>
-                        
-                        {/* Experience */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center gap-2 text-sm text-gray-600'>
-                            <span className='text-blue-500'>⭐</span>
-                            <span>{service.experience}</span>
-                          </div>
-                        </td>
-                        
-                        {/* Starting Price */}
-                        <td className='px-4 py-3'>
-                          <div className='text-sm font-semibold text-green-600'>
-                            Rs. {service.fees}
-                          </div>
-                        </td>
-                        
-                        {/* Action Buttons */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center justify-center gap-2'>
-                            <a 
-                              href="https://api.whatsapp.com/send/?phone=923234499881&text&type=phone_number&app_absent=0"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className='bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1'
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <span>📱</span>
-                              Book
-                            </a>
-                            <button 
-                              onClick={() => navigate(`/appointments/${service._id}`)}
-                              className='bg-blue-100 hover:bg-blue-200 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors'
-                            >
-                              View
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                toggleServiceExpansion(service._id)
-                              }}
-                              className='text-blue-600 hover:text-blue-700 text-xs font-medium flex items-center gap-1 px-2 py-1 rounded border border-blue-200 hover:bg-blue-50'
-                            >
-                              {isExpanded ? (
-                                <>
-                                  <span>👁️</span>
-                                  Less
-                                </>
-                              ) : (
-                                <>
-                                  <span>👁️</span>
-                                  More
-                                </>
-                              )}
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      
-                      {/* Expanded Description Row */}
-                      {isExpanded && (
-                        <tr className='bg-blue-50'>
-                          <td colSpan="5" className='px-4 py-4'>
-                            <div className='bg-white rounded-lg p-4 border border-blue-200'>
-                              <h4 className='font-semibold text-gray-900 mb-3 flex items-center gap-2'>
-                                <span>📋</span>
-                                Complete Service Details
-                              </h4>
-                              <div className='prose prose-sm max-w-none'>
-                                <div className='text-gray-700 leading-relaxed whitespace-pre-line'>
-                                  {service.about}
-                                </div>
-                              </div>
-                              <div className='mt-3 pt-3 border-t border-gray-200'>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    toggleServiceExpansion(service._id)
-                                  }}
-                                  className='text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-2'
-                                >
-                                  <span>👁️</span>
-                                  Show Less
-                                </button>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      )}
-                    </React.Fragment>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
+        {/* Services Cards Grid - Beautiful Card Layout */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8'>
+          {services.slice(0, 8).map((service, index) => {
+            const isExpanded = expandedServices.has(service._id)
+            return (
+              <div key={index} className='bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden group hover:scale-105'>
+                {/* Card Header with Service Icon */}
+                <div className='relative p-6 bg-gradient-to-br from-gray-50 to-gray-100'>
+                  <div className='absolute top-3 right-3'>
+                    <span className='bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium animate-pulse'>
+                      Popular
+                    </span>
+                  </div>
+                  
+                  <div className='flex flex-col items-center text-center'>
+                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-3 ${getServiceIconStyle(service.speciality)} transform group-hover:scale-110 transition-transform duration-300`}>
+                      <span className='text-2xl'>{getServiceIcon(service.speciality)}</span>
+                    </div>
+                    
+                    <h3 className='font-bold text-gray-900 text-lg mb-2 leading-tight'>
+                      {service.name}
+                    </h3>
+                    
+                    <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium'>
+                      <span>{getServiceIcon(service.speciality)}</span>
+                      <span>{service.speciality}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className='p-6'>
+                  {/* Experience and Rating */}
+                  <div className='flex items-center justify-between mb-4'>
+                    <div className='flex items-center gap-2 text-sm text-gray-600'>
+                      <span className='text-blue-500'>⭐</span>
+                      <span className='font-medium'>{service.experience}</span>
+                    </div>
+                    <div className='text-right'>
+                      <div className='text-2xl font-bold text-green-600'>Rs. {service.fees}</div>
+                      <div className='text-xs text-gray-500'>Starting Price</div>
+                    </div>
+                  </div>
+
+                  {/* Service Description Preview */}
+                  <div className='mb-4'>
+                    <p className='text-sm text-gray-600 leading-relaxed line-clamp-3'>
+                      {getServiceDescriptionPreview(service.about)}
+                    </p>
+                    <button
+                      onClick={() => toggleServiceExpansion(service._id)}
+                      className='text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-1 mt-2'
+                    >
+                      <span>👁️</span>
+                      {isExpanded ? 'Show Less' : 'Read More'}
+                    </button>
+                  </div>
+
+                  {/* Expanded Description */}
+                  {isExpanded && (
+                    <div className='mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200'>
+                      <div className='text-sm text-gray-700 leading-relaxed'>
+                        {service.about.length > 200 
+                          ? `${service.about.substring(0, 200)}...` 
+                          : service.about
+                        }
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  <div className='flex gap-2'>
+                    <a 
+                      href="https://api.whatsapp.com/send/?phone=923234499881&text&type=phone_number&app_absent=0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 hover:scale-105 transform duration-200'
+                    >
+                      <span>📱</span>
+                      Book Now
+                    </a>
+                    <button 
+                      onClick={() => navigate(`/appointments/${service._id}`)}
+                      className='flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors hover:scale-105 transform duration-200'
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
         {/* View All Button */}
@@ -221,6 +171,29 @@ const getServiceIconStyle = (speciality) => {
     'Kitchen Hood': 'bg-gradient-to-br from-red-400 to-red-600 text-white shadow-lg'
   }
   return styles[speciality] || 'bg-gradient-to-br from-gray-400 to-gray-600 text-white shadow-lg'
+}
+
+// Helper function to get service description preview
+const getServiceDescriptionPreview = (description) => {
+  if (!description) return 'Professional repair service with certified technicians.';
+  
+  // Clean up the description and get a meaningful preview
+  const cleanDescription = description
+    .replace(/\.{3,}/g, '. ') // Replace multiple dots with single dot
+    .replace(/\.{2,}/g, '. ') // Replace double dots with single dot
+    .replace(/\d+\./g, '') // Remove numbered bullets
+    .trim();
+  
+  // Get first meaningful sentence
+  const firstSentence = cleanDescription.split('.')[0];
+  
+  if (firstSentence && firstSentence.length > 20) {
+    return firstSentence + '.';
+  }
+  
+  // If first sentence is too short, get more content
+  const words = cleanDescription.split(' ').slice(0, 20);
+  return words.join(' ') + '...';
 }
 
 export default TopServices

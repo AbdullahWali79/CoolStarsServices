@@ -59,218 +59,70 @@ const Services = () => {
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
-      <div className='max-w-7xl mx-auto px-6 py-12'>
-        {/* Page Header - Reduced spacing */}
-        <div className='text-center mb-10'>
-          <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-sm font-medium mb-3'>
+      <div className='max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-12'>
+        {/* Page Header - Mobile Optimized */}
+        <div className='text-center mb-6 sm:mb-8 md:mb-10'>
+          <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-3'>
             <span>🔧</span>
             <span>Professional Services</span>
           </div>
-          <h1 className='text-3xl md:text-4xl font-bold text-gray-900 mb-4'>
+          <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Our Appliance
             <span className='block text-blue-600'>Repair Services</span>
           </h1>
-          <p className='text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed'>
+          <p className='text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-2'>
             Expert technicians with years of experience in repairing all types of home appliances. 
             Fast, reliable, and affordable service guaranteed.
           </p>
         </div>
 
-        {/* Filter Section - Reduced spacing */}
-        <div className='mb-8'>
-          <div className='flex flex-col sm:flex-row items-start gap-4'>
+        {/* Filter Section - Mobile Optimized */}
+        <div className='mb-6 sm:mb-8'>
+          <div className='flex flex-col sm:flex-row items-start gap-3 sm:gap-4'>
             {/* Mobile Filter Button */}
             <button 
-              className={`py-2.5 px-5 border rounded-xl text-sm transition-all sm:hidden ${showFilter ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300'}`} 
+              className={`py-2.5 px-4 sm:px-5 border rounded-xl text-sm transition-all sm:hidden w-full ${showFilter ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300'}`} 
               onClick={() => setShowFilter(prev => !prev)}
             >
               {showFilter ? 'Hide Filters' : 'Show Filters'}
             </button>
             
-            {/* Filter Categories */}
-            <div className={`flex flex-wrap gap-2 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
-              {serviceCategories.map((category, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleCategoryClick(category)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                    selectedCategory === category.name
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:shadow-md'
-                  }`}
-                >
-                  <span>{category.icon}</span>
-                  <span>{category.name}</span>
-                </button>
-              ))}
+            {/* Filter Categories - Mobile Scrollable */}
+            <div className={`${showFilter ? 'flex' : 'hidden sm:flex'} flex-wrap gap-2 w-full`}>
+              <div className='flex gap-2 overflow-x-auto sm:overflow-visible sm:flex-wrap pb-2 sm:pb-0'>
+                {serviceCategories.map((category, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleCategoryClick(category)}
+                    className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+                      selectedCategory === category.name
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:shadow-md'
+                    }`}
+                  >
+                    <span>{category.icon}</span>
+                    <span className='hidden xs:inline sm:inline'>{category.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Services Count */}
-        <div className='mb-6'>
-          <p className='text-gray-600'>
+        <div className='mb-4 sm:mb-6'>
+          <p className='text-sm sm:text-base text-gray-600 px-1'>
             Showing <span className='font-semibold text-blue-600'>{filteredServices.length}</span> services
             {selectedCategory !== 'All Services' && ` in ${selectedCategory}`}
           </p>
         </div>
 
-        {/* Services Table - Compact Format with Expandable Descriptions */}
-        <div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200'>
-          <div className='overflow-x-auto'>
-            <table className='w-full'>
-              {/* Table Header */}
-              <thead className='bg-gray-50 border-b border-gray-200'>
-                <tr>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Service</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Speciality</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Experience</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Starting Price</th>
-                  <th className='px-4 py-3 text-left text-sm font-semibold text-gray-900'>Description</th>
-                  <th className='px-4 py-3 text-center text-sm font-semibold text-gray-900'>Action</th>
-                </tr>
-              </thead>
-              
-              {/* Table Body */}
-              <tbody className='divide-y divide-gray-200'>
-                {filteredServices.map((service, index) => {
-                  const isExpanded = expandedServices.has(service._id)
-                  return (
-                    <React.Fragment key={index}>
-                      {/* Main Row */}
-                      <tr 
-                        className='hover:bg-gray-50 transition-colors duration-200 cursor-pointer'
-                        onClick={() => navigate(`/appointments/${service._id}`)}
-                      >
-                        {/* Service Icon & Name */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center gap-3'>
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${getServiceIconStyle(service.speciality)}`}>
-                              <span className='text-lg'>{getServiceIcon(service.speciality)}</span>
-                            </div>
-                            <div>
-                              <h3 className='font-semibold text-gray-900 text-sm'>{service.name}</h3>
-                              <p className='text-xs text-gray-500'>{service.degree}</p>
-                            </div>
-                          </div>
-                        </td>
-                        
-                        {/* Speciality */}
-                        <td className='px-4 py-3'>
-                          <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium'>
-                            <span>{getServiceIcon(service.speciality)}</span>
-                            <span>{service.speciality}</span>
-                          </div>
-                        </td>
-                        
-                        {/* Experience */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center gap-2 text-sm text-gray-600'>
-                            <span className='text-green-500'>⏱️</span>
-                            <span>{service.experience}</span>
-                          </div>
-                        </td>
-                        
-                        {/* Starting Price */}
-                        <td className='px-4 py-3'>
-                          <div className='text-sm font-semibold text-green-600'>
-                            Rs. {service.fees}
-                          </div>
-                        </td>
-                        
-                        {/* Description with Show In/Out Button */}
-                        <td className='px-4 py-3'>
-                          <div className='max-w-xs'>
-                            <p className='text-sm text-gray-600 line-clamp-2 leading-relaxed mb-2'>
-                              {getServiceDescriptionPreview(service.about)}
-                            </p>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                toggleServiceExpansion(service._id)
-                              }}
-                              className='text-blue-600 hover:text-blue-700 text-xs font-medium flex items-center gap-1'
-                            >
-                              {isExpanded ? (
-                                <>
-                                  <span>👁️</span>
-                                  Show Less
-                                </>
-                              ) : (
-                                <>
-                                  <span>👁️</span>
-                                  Show More
-                                </>
-                              )}
-                            </button>
-                          </div>
-                        </td>
-                        
-                        {/* Action Buttons */}
-                        <td className='px-4 py-3'>
-                          <div className='flex items-center justify-center gap-2'>
-                            <a 
-                              href="https://api.whatsapp.com/send/?phone=923234499881&text&type=phone_number&app_absent=0"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className='bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1'
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <span>📱</span>
-                              Book
-                            </a>
-                            <button 
-                              onClick={() => navigate(`/appointments/${service._id}`)}
-                              className='bg-blue-100 hover:bg-blue-200 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors'
-                            >
-                              View
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      
-                      {/* Expanded Description Row */}
-                      {isExpanded && (
-                        <tr className='bg-blue-50'>
-                          <td colSpan="6" className='px-4 py-4'>
-                            <div className='bg-white rounded-lg p-4 border border-blue-200'>
-                              <h4 className='font-semibold text-gray-900 mb-3 flex items-center gap-2'>
-                                <span>📋</span>
-                                Complete Service Details
-                              </h4>
-                              <div className='prose prose-sm max-w-none'>
-                                <div className='text-gray-700 leading-relaxed whitespace-pre-line'>
-                                  {service.about}
-                                </div>
-                              </div>
-                              <div className='mt-3 pt-3 border-t border-gray-200'>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    toggleServiceExpansion(service._id)
-                                  }}
-                                  className='text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center gap-2'
-                                >
-                                  <span>👁️</span>
-                                  Show Less
-                                </button>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      )}
-                    </React.Fragment>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
-          
-          {/* No Services Message */}
-          {filteredServices.length === 0 && (
-            <div className='text-center py-16 px-4'>
+        {/* Services Display - Beautiful Cards Layout for All Devices */}
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'>
+          {filteredServices.length === 0 ? (
+            <div className='col-span-full text-center py-16 px-4'>
               <div className='w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-                <span className='text-3xl'>🔍</span>
+                <span className='text-4xl'>🔧</span>
               </div>
               <h3 className='text-xl font-semibold text-gray-900 mb-2'>No Services Found</h3>
               <p className='text-gray-600 mb-4'>We couldn't find any services matching your criteria.</p>
@@ -281,8 +133,96 @@ const Services = () => {
                 View All Services
               </button>
             </div>
+          ) : (
+            filteredServices.map((service, index) => {
+              const isExpanded = expandedServices.has(service._id)
+              return (
+                <div key={index} className='bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden group hover:scale-105'>
+                  {/* Card Header with Service Icon */}
+                  <div className='relative p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-gray-100'>
+                    <div className='flex flex-col items-center text-center'>
+                      <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center mb-3 ${getServiceIconStyle(service.speciality)} transform group-hover:scale-110 transition-transform duration-300`}>
+                        <span className='text-lg sm:text-2xl'>{getServiceIcon(service.speciality)}</span>
+                      </div>
+                      
+                      <h3 className='font-bold text-gray-900 text-sm sm:text-lg mb-2 leading-tight text-center'>
+                        {service.name}
+                      </h3>
+                      
+                      <div className='inline-flex items-center gap-1 sm:gap-2 bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium'>
+                        <span>{getServiceIcon(service.speciality)}</span>
+                        <span className='truncate'>{service.speciality}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Body */}
+                  <div className='p-4 sm:p-6'>
+                    {/* Experience and Rating */}
+                    <div className='flex items-center justify-between mb-4'>
+                      <div className='flex items-center gap-2 text-xs sm:text-sm text-gray-600'>
+                        <span className='text-blue-500'>⭐</span>
+                        <span className='font-medium'>{service.experience}</span>
+                      </div>
+                      <div className='text-right'>
+                        <div className='text-lg sm:text-2xl font-bold text-green-600'>Rs. {service.fees}</div>
+                        <div className='text-xs text-gray-500'>Starting</div>
+                      </div>
+                    </div>
+
+                    {/* Service Description Preview */}
+                    <div className='mb-4'>
+                      <p className='text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-3'>
+                        {getServiceDescriptionPreview(service.about)}
+                      </p>
+                      <button
+                        onClick={() => toggleServiceExpansion(service._id)}
+                        className='text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium flex items-center gap-1 mt-2'
+                      >
+                        <span>👁️</span>
+                        {isExpanded ? 'Show Less' : 'Read More'}
+                      </button>
+                    </div>
+
+                    {/* Expanded Description */}
+                    {isExpanded && (
+                      <div className='mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200'>
+                        <div className='text-xs sm:text-sm text-gray-700 leading-relaxed'>
+                          {service.about.length > 300 
+                            ? `${service.about.substring(0, 300)}...` 
+                            : service.about
+                          }
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Action Buttons */}
+                    <div className='flex gap-2'>
+                      <a 
+                        href="https://api.whatsapp.com/send/?phone=923234499881&text&type=phone_number&app_absent=0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className='flex-1 bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-1 sm:gap-2 hover:scale-105 transform duration-200'
+                      >
+                        <span>📱</span>
+                        <span className='hidden xs:inline sm:inline'>Book</span>
+                        <span className='xs:hidden sm:hidden'>📱</span>
+                      </a>
+                      <button 
+                        onClick={() => navigate(`/appointments/${service._id}`)}
+                        className='flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-colors hover:scale-105 transform duration-200'
+                      >
+                        <span className='hidden xs:inline sm:inline'>View</span>
+                        <span className='xs:hidden sm:hidden'>👁️</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
           )}
         </div>
+
 
         {/* Bottom CTA Section - Reduced spacing */}
         <div className='text-center mt-16'>
