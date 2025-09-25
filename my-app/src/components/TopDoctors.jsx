@@ -51,8 +51,12 @@ const TopServices = () => {
                   </div>
                   
                   <div className='flex flex-col items-center text-center'>
-                    <div className={`w-16 h-16 rounded-xl flex items-center justify-center mb-3 ${getServiceIconStyle(service.speciality)} transform group-hover:scale-110 transition-transform duration-300`}>
-                      <span className='text-2xl'>{getServiceIcon(service.speciality)}</span>
+                    <div className='w-16 h-16 rounded-xl overflow-hidden mb-3 transform group-hover:scale-110 transition-transform duration-300 shadow-lg'>
+                      <img 
+                        src={getServiceImage(service.speciality)} 
+                        alt={service.speciality}
+                        className='w-full h-full object-cover'
+                      />
                     </div>
                     
                     <h3 className='font-bold text-gray-900 text-lg mb-2 leading-tight'>
@@ -60,7 +64,13 @@ const TopServices = () => {
                     </h3>
                     
                     <div className='inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium'>
-                      <span>{getServiceIcon(service.speciality)}</span>
+                      <span className='w-4 h-4 rounded-full overflow-hidden'>
+                        <img 
+                          src={getServiceImage(service.speciality)} 
+                          alt={service.speciality}
+                          className='w-full h-full object-cover'
+                        />
+                      </span>
                       <span>{service.speciality}</span>
                     </div>
                   </div>
@@ -147,17 +157,17 @@ const TopServices = () => {
   )
 }
 
-// Helper function to get service icons
-const getServiceIcon = (speciality) => {
-  const icons = {
-    'Air Conditioner': '❄️',
-    'LED TV Repair': '📺',
-    'Washing Machine': '🧺',
-    'Fridge & Dispensor': '🧊',
-    'Other Electronics': '⚡',
-    'Kitchen Hood': '🍳'
+// Helper function to get service images
+const getServiceImage = (speciality) => {
+  const images = {
+    'Air Conditioner': '/src/assets/ac01.png',
+    'LED TV Repair': '/src/assets/led01.png',
+    'Washing Machine': '/src/assets/wm01.png',
+    'Fridge & Dispensor': '/src/assets/fridge01.png',
+    'Other Electronics': '/src/assets/mc01.png',
+    'Kitchen Hood': '/src/assets/oven01.png'
   }
-  return icons[speciality] || '🔧'
+  return images[speciality] || '/src/assets/appliance.png'
 }
 
 // Helper function to get beautiful icon styles with gradients

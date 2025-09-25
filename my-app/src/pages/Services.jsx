@@ -14,13 +14,13 @@ const Services = () => {
   const { services } = useContext(AppContext)
 
   const serviceCategories = [
-    { name: 'All Services', value: 'all', icon: '🔧' },
-    { name: 'Air Conditioner', value: 'Air Conditioner', icon: '❄️' },
-    { name: 'LED TV Repair', value: 'LED TV Repair', icon: '📺' },
-    { name: 'Washing Machine', value: 'Washing Machine', icon: '🧺' },
-    { name: 'Fridge & Dispensor', value: 'Fridge & Dispensor', icon: '🧊' },
-    { name: 'Other Electronics', value: 'Other Electronics', icon: '⚡' },
-    { name: 'Kitchen Hood', value: 'Kitchen Hood', icon: '🍳' }
+    { name: 'All Services', value: 'all', image: '/src/assets/appliance.png' },
+    { name: 'Air Conditioner', value: 'Air Conditioner', image: '/src/assets/ac01.png' },
+    { name: 'LED TV Repair', value: 'LED TV Repair', image: '/src/assets/led01.png' },
+    { name: 'Washing Machine', value: 'Washing Machine', image: '/src/assets/wm01.png' },
+    { name: 'Fridge & Dispensor', value: 'Fridge & Dispensor', image: '/src/assets/fridge01.png' },
+    { name: 'Other Electronics', value: 'Other Electronics', image: '/src/assets/mc01.png' },
+    { name: 'Kitchen Hood', value: 'Kitchen Hood', image: '/src/assets/oven01.png' }
   ]
 
   const applyFilter = () => {
@@ -100,7 +100,13 @@ const Services = () => {
                         : 'bg-white text-gray-700 border border-gray-200 hover:border-blue-300 hover:shadow-md'
                     }`}
                   >
-                    <span>{category.icon}</span>
+                    <span className='w-4 h-4 rounded-full overflow-hidden'>
+                      <img 
+                        src={category.image} 
+                        alt={category.name}
+                        className='w-full h-full object-cover'
+                      />
+                    </span>
                     <span className='hidden xs:inline sm:inline'>{category.name}</span>
                   </button>
                 ))}
@@ -138,11 +144,15 @@ const Services = () => {
               const isExpanded = expandedServices.has(service._id)
               return (
                 <div key={index} className='bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden group hover:scale-105'>
-                  {/* Card Header with Service Icon */}
+                  {/* Card Header with Service Image */}
                   <div className='relative p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-gray-100'>
                     <div className='flex flex-col items-center text-center'>
-                      <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center mb-3 ${getServiceIconStyle(service.speciality)} transform group-hover:scale-110 transition-transform duration-300`}>
-                        <span className='text-lg sm:text-2xl'>{getServiceIcon(service.speciality)}</span>
+                      <div className='w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden mb-3 transform group-hover:scale-110 transition-transform duration-300 shadow-lg'>
+                        <img 
+                          src={getServiceImage(service.speciality)} 
+                          alt={service.speciality}
+                          className='w-full h-full object-cover'
+                        />
                       </div>
                       
                       <h3 className='font-bold text-gray-900 text-sm sm:text-lg mb-2 leading-tight text-center'>
@@ -150,7 +160,13 @@ const Services = () => {
                       </h3>
                       
                       <div className='inline-flex items-center gap-1 sm:gap-2 bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium'>
-                        <span>{getServiceIcon(service.speciality)}</span>
+                        <span className='w-4 h-4 rounded-full overflow-hidden'>
+                          <img 
+                            src={getServiceImage(service.speciality)} 
+                            alt={service.speciality}
+                            className='w-full h-full object-cover'
+                          />
+                        </span>
                         <span className='truncate'>{service.speciality}</span>
                       </div>
                     </div>
@@ -255,17 +271,17 @@ const Services = () => {
   )
 }
 
-// Helper function to get service icons
-function getServiceIcon(speciality) {
-  const icons = {
-    'Air Conditioner': '❄️',
-    'LED TV Repair': '📺',
-    'Washing Machine': '🧺',
-    'Fridge & Dispensor': '🧊',
-    'Other Electronics': '⚡',
-    'Kitchen Hood': '🍳'
+// Helper function to get service images
+function getServiceImage(speciality) {
+  const images = {
+    'Air Conditioner': '/src/assets/ac01.png',
+    'LED TV Repair': '/src/assets/led01.png',
+    'Washing Machine': '/src/assets/wm01.png',
+    'Fridge & Dispensor': '/src/assets/fridge01.png',
+    'Other Electronics': '/src/assets/mc01.png',
+    'Kitchen Hood': '/src/assets/oven01.png'
   }
-  return icons[speciality] || '🔧'
+  return images[speciality] || '/src/assets/appliance.png'
 }
 
 // Helper function to get beautiful icon styles with gradients

@@ -176,6 +176,53 @@ html {
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+    
+    /* Service card improvements for mobile */
+    .service-card-mobile {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Better mobile navigation */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* Mobile-optimized hero section */
+    .hero-mobile {
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    /* Mobile service grid */
+    .services-grid-mobile {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    /* Mobile-friendly buttons */
+    .btn-mobile {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 0.5rem;
+    }
+    
+    /* Mobile image optimization */
+    .img-mobile {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
 }
 
 /* Ultra small devices (273px and below) */

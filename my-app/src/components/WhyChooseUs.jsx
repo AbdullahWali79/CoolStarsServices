@@ -6,37 +6,43 @@ const WhyChooseUs = () => {
       icon: "⚡",
       title: "Lightning Fast Service",
       description: "Get same-day repair service. Our technicians arrive within 2 hours of your call.",
-      features: ["2-hour response time", "Same-day repairs", "24/7 availability"]
+      features: ["2-hour response time", "Same-day repairs", "24/7 availability"],
+      color: "from-yellow-400 to-orange-500"
     },
     {
       icon: "🔧",
       title: "Expert Technicians",
       description: "Certified professionals with 10+ years of experience in appliance repair.",
-      features: ["Licensed technicians", "Brand certified", "Continuous training"]
+      features: ["Licensed technicians", "Brand certified", "Continuous training"],
+      color: "from-blue-400 to-blue-600"
     },
     {
       icon: "💰",
       title: "Affordable Pricing",
       description: "Save up to 70% compared to buying new appliances. Transparent pricing with no hidden fees.",
-      features: ["No hidden charges", "Free estimates", "Competitive rates"]
+      features: ["No hidden charges", "Free estimates", "Competitive rates"],
+      color: "from-green-400 to-green-600"
     },
     {
       icon: "🛡️",
       title: "100% Guarantee",
       description: "We stand behind our work with comprehensive warranties and satisfaction guarantee.",
-      features: ["Parts warranty", "Service guarantee", "Money-back promise"]
+      features: ["Parts warranty", "Service guarantee", "Money-back promise"],
+      color: "from-purple-400 to-purple-600"
     },
     {
       icon: "🚚",
       title: "Doorstep Service",
       description: "No need to move heavy appliances. We come to you with all necessary tools and parts.",
-      features: ["Home service", "Mobile workshop", "No transportation needed"]
+      features: ["Home service", "Mobile workshop", "No transportation needed"],
+      color: "from-red-400 to-red-600"
     },
     {
       icon: "📱",
       title: "Easy Booking",
       description: "Book your repair service online or over the phone. Simple and convenient process.",
-      features: ["Online booking", "Phone support", "WhatsApp booking"]
+      features: ["Online booking", "Phone support", "WhatsApp booking"],
+      color: "from-cyan-400 to-cyan-600"
     }
   ]
 
@@ -62,9 +68,9 @@ const WhyChooseUs = () => {
         {/* Reasons Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16'>
           {reasons.map((reason, index) => (
-            <div key={index} className='group bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200'>
+            <div key={index} className='group bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 hover:bg-white hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-blue-300 hover:scale-105'>
               {/* Icon */}
-              <div className='w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl mb-6 group-hover:scale-110 transition-transform duration-300'>
+              <div className={`w-16 h-16 bg-gradient-to-br ${reason.color} rounded-2xl flex items-center justify-center text-white text-3xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                 {reason.icon}
               </div>
               

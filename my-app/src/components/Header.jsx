@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 
 const Header = () => {
   return (
-    <div className='relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-lg md:rounded-2xl px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden shadow-2xl mx-2 sm:mx-4 md:mx-0'>
+    <div className='relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-xl md:rounded-2xl px-4 sm:px-6 md:px-10 lg:px-20 overflow-hidden shadow-2xl mx-2 sm:mx-4 md:mx-0 mb-8'>
       
       {/* Background Pattern */}
       <div className='absolute inset-0 bg-black/10'></div>
@@ -31,7 +31,7 @@ const Header = () => {
           {/* Main Headline - Mobile Optimized */}
           <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight'>
             Expert Appliance Repair
-            <span className='block text-yellow-300'>in 2 Hours or Less!</span>
+            <span className='block text-yellow-300 animate-pulse'>in 2 Hours or Less!</span>
           </h1>
           
           {/* Subheadline - Mobile Optimized */}
